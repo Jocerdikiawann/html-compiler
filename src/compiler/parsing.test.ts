@@ -1,5 +1,7 @@
 import { assert, expect, test ,describe,it} from 'vitest'
-import {parse} from "./parsing"
+
+const validNameChar = /[a-zA-Z0-9_$]/;
+
 
 describe("Parser Testing",()=>{
     it('pastiin parse itu function',()=>{
@@ -8,7 +10,7 @@ describe("Parser Testing",()=>{
     it("parsing html basic",()=>{
         let template = `<span>ini span</span>`
 
-        expect(tag(template)).equal({
+        expect(parse(template)).equal({
             start:0,
             end:21
         })
@@ -16,33 +18,53 @@ describe("Parser Testing",()=>{
     })
 })
 
-function tag(template:string):any{
+function parse(template:string):any{
     let index=0
 
     let start = 0
 
     let end = template.length
 
+    let result ={}
 
-
-    function tag(){
+    
+    function fragment(){
         const start = index++
-        const char = template[index]
+        let char = template[index]
 
-        if(char === '<'){
+       
 
+        if(char == '<'){
+            let name = ''
+            let element = {
+                start:index,
+                
+            }
+
+            while(validNameChar.test(char)){
+                name += char
+                index += 1
+                char = template[index]
+            }
+
+            result= {
+                start:element.start,
+                name:name
+            }
+        }else{
+
+        index +=1
         }
-
-        index = index+1
-        
     }
 
     while(index < template.length){
-        tag()
+        fragment()
     }
 
     return {
         start:start,
-        end:end
+        end:end,
+        result:result
     }
 }
+
