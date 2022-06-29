@@ -45,7 +45,9 @@ export function mount_component(
   anchor: any,
   customElement: any
 ) {
-    
+    //todo remove this line
+    customElement
+
   if (component.$$) {
     const { fragment }: T$$ = component.$$;
     if (fragment) {
@@ -73,7 +75,8 @@ export function init(
     update: () => {},
   });
 
-  let ready = false;
+  //todo remove this line
+  // let ready = false;
 
   $$.ctx = instance
     ? instance(component, options.props || {}, (indexEl, value, ...rest) => {
@@ -93,7 +96,7 @@ export function init(
     : [];
 
   $$.update();
-  ready = true;
+  // ready = true;
   $$.fragment = fragment ? fragment($$.ctx) : null;
 
   $$.fragment?.create();

@@ -1,7 +1,10 @@
 import { BaseComponent, Fragment, init, listen } from "./internal/Component";
-import { append, element, insert, setText } from "./internal/dom";
+import { append, element, setText } from "./internal/dom";
 import { safe_not_equal } from "./internal/utils";
 function instance ($$self:any,$$props:any,$$invalidate:any):any[]{
+//todo remove this line
+    $$self
+    $$props
 
     let count=0
 
@@ -24,6 +27,9 @@ function create_fragment(ctx:any[]):Fragment{
             listen(btn,'click',ctx[1])
         },
         mount(target, anchor) {
+            //todo remove this line
+            anchor
+            
             append(target,btn)
             append(target,span)
         },

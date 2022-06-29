@@ -31,6 +31,9 @@ export function flush(){
         flushIndex =0
     }while(dirtyComponent.length)
     stillUpdate = false
+
+    //todo remove this line
+    current_Component?.$$
 }
 
 let flushIndex =0

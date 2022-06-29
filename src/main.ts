@@ -14,6 +14,10 @@ function instance(
   $$options:any,
   $$invalidate:(i:any,ret:any,...res:any)=>any
 ):Array<any>{
+  //todo remove this line
+  $$self
+  $$options
+  
   let count =0
   let name='trian'
 
