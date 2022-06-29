@@ -30,6 +30,15 @@ export function listen(
   return () => node.removeEventListener(event, handler, options);
 }
 
+export function create_component(block:Fragment) {
+	block && block.create();
+}
+
+export function claim_component(block:any, parent_nodes:any) {
+	block && block.l(parent_nodes);
+}
+
+
 export function mount_component(
   component: App,
   target: any,

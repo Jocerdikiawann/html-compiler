@@ -1,9 +1,10 @@
 
 import './style.css'
 
-import {append,element, insert, setText, set_input_value, text} from "./internal/dom"
-import {App,Fragment, listen,init} from "./internal/App"
+import {append,element, insert, setText, set_input_value} from "./internal/dom"
+import {App,Fragment, listen,init, create_component, mount_component} from "./internal/App"
 import {safe_not_equal} from "./internal/utils"
+import { Tes } from './component'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
@@ -36,6 +37,7 @@ function fragment(ctx:Array<any>):Fragment{
   let btn:HTMLElement;
   let input:HTMLInputElement
   let span:HTMLSpanElement
+  let tes = new Tes({})
 
 
   return {
@@ -59,6 +61,8 @@ function fragment(ctx:Array<any>):Fragment{
       listen(btn,'click',ctx[2])
       listen(input,'input',ctx[3])
 
+      create_component(tes.$$?.fragment!!)
+
       
     },
     mount(target:any,anchor:any) {
@@ -69,6 +73,8 @@ function fragment(ctx:Array<any>):Fragment{
       append(div,input)
       append(div,span)
 
+      mount_component(tes,div,null,null)
+
 
     },
     update(ctx:any,dirty:Array<number>) {
@@ -76,7 +82,7 @@ function fragment(ctx:Array<any>):Fragment{
         setText(ctx[0],h1)
       }
       
-      if(dirty[1] != -1){
+      if(dirty[1] != null || dirty[1] != undefined){
   
         //name
         set_input_value(input,ctx[1])
