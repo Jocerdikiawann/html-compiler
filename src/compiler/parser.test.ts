@@ -1,16 +1,14 @@
 import { assert, describe, it } from "vitest";
-import {parse} from "./parsing"
+import {toMolecule} from "./parser"
 
 describe("Parser Testing", () => {
   it("pastiin parse itu function", () => {
-    assert.deepEqual(typeof parse, "function", "Harusnya");
+    assert.deepEqual(typeof toMolecule, "function", "Harusnya");
   });
   it("parsing html basic", () => {
     let template = `<span>ini span</span>`;
-
-
-    
-    assert.deepEqual(parse(template),{
+    assert.deepEqual(toMolecule(template),{
+      html:{
         start:0,
         end:21,
         type:"Fragment",
@@ -39,6 +37,9 @@ describe("Parser Testing", () => {
             }
         ],
         attributes:{}
+    },
+    js:null,
+    css:null
     });
   });
 });

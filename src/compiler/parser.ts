@@ -1,21 +1,27 @@
 
 const validNameChar = /[a-zA-Z0-9_$]/;
-export type Element ={
+
+export type Molecule ={
     start:number,
     end:number|null,
     type:'Fragment'|'Element'|'Text',
     data:string|null,
     name:string|null,
-    children:Array<Element>,
+    children:Array<Molecule>,
     attributes:any
 }
 
-export function parse(template: string): any {
+export function toMolecule(source: string): {
+    js:string|null,
+    html:Molecule,
+    css:string|null
+} {
     let index = 0;
+    let template = ``
 
-    let root:Element = {
+    let root:Molecule = {
         start: 0,
-		end: template.length,
+		end: 0,
 		type: 'Fragment',
         data:null,
         name:null,
@@ -26,17 +32,13 @@ export function parse(template: string): any {
     let stack = [root]
     let current = root
 
-    function error(msg:string){
-        throw error(msg)
-    }
-
-    function match ( str:string ) {
-		return template.slice( index, index + str.length ) === str;
-	}
-
 
     function fragment(){
         let char = template[index]
+
+        if(char === ' '){
+            index +=1
+        }
 
         //check tag <span> until </span>
         if(char === "<"){
@@ -72,7 +74,7 @@ export function parse(template: string): any {
 
         //never found > throw eror
         if(isClosedTag){
-            if(char !== ">") return error(`Unexpected > at ${name}: ${index} actual is ${char}`)
+            if(char !== ">") throw Error(`Unexpected > at ${name}: ${index} actual is ${char}`)
 
             char +=1
             current.end = index
@@ -84,7 +86,7 @@ export function parse(template: string): any {
 
         }
 
-        const element:Element ={
+        const element:Molecule ={
             start:start,
             end:null,//fill later at next recursive
             name:name,
@@ -115,7 +117,7 @@ export function parse(template: string): any {
         let start = index
         let data =''
 
-        while(index < template.length && template[index] !== "<" && !match("{{")){
+        while(index < template.length && template[index] !== "<"){
             data += template[index++]
         }
 
@@ -132,12 +134,40 @@ export function parse(template: string): any {
         return fragment
        
     }
+    //split into script,template,style block
+    const {
+        html,
+        script,
+        style
+    } = extract(source)
+
+    template = html
+    root.end = html.length
+
+    //still have no ide about this
+    // function invoke vs function call ?
     let state:any = fragment
 
     while(index < template.length-1){
         state = state()
     }
 
-    return root
+    return {
+        html:root,
+        js:script,
+        css:style
+    }
+}
 
+function extract(source:string):{
+    script:string|null,
+    html:string,
+    style:string|null
+}{
+    //todo extract to each context
+    return{
+        script:null,
+        html:source,
+        style:null
+    }
 }
