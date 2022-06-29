@@ -6,8 +6,8 @@ describe("Parser Testing", () => {
     assert.deepEqual(typeof toMolecule, "function", "Harusnya");
   });
   it("parsing html basic", () => {
-    let template = `<span>ini span</span>`;
-    assert.deepEqual(toMolecule(template),{
+    let source = `<span>ini span</span>`;
+    assert.deepEqual(toMolecule(source),{
       html:{
         start:0,
         end:21,

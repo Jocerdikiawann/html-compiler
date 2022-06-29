@@ -30,7 +30,7 @@ export function toMolecule(source: string): {
     }
 
     let stack = [root]
-    let current = root
+    let currentMolecule = root
 
 
     function fragment(){
@@ -77,16 +77,16 @@ export function toMolecule(source: string): {
             if(char !== ">") throw Error(`Unexpected > at ${name}: ${index} actual is ${char}`)
 
             char +=1
-            current.end = index
+            currentMolecule.end = index
             stack.pop()
-            current = stack[stack.length -1]
+            currentMolecule = stack[stack.length -1]
 
             //we found > and search for children
             return fragment
 
         }
 
-        const element:Molecule ={
+        const molecule:Molecule ={
             start:start,
             end:null,//fill later at next recursive
             name:name,
@@ -97,11 +97,11 @@ export function toMolecule(source: string): {
         }
 
         //current add children
-        current.children.push(element)
-        stack.push(element)
+        currentMolecule.children.push(molecule)
+        stack.push(molecule)
 
         //change current to children
-        current = element
+        currentMolecule = molecule
 
 
         //temp stop
@@ -110,7 +110,6 @@ export function toMolecule(source: string): {
             return  fragment
         }
 
-        index = template.length
     }
 
     function text(){
@@ -121,7 +120,7 @@ export function toMolecule(source: string): {
             data += template[index++]
         }
 
-        current.children.push({
+        currentMolecule.children.push({
             start:start,
             end:index,
             name:"Text",
