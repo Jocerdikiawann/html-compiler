@@ -13,7 +13,7 @@ export interface T$$ {
   fragment: Fragment | null;
   update: () => void;
 }
-export class App {
+export class BaseComponent {
   $$: T$$ | undefined;
   $$set?: ($$props: any) => void;
 
@@ -40,7 +40,7 @@ export function claim_component(block:any, parent_nodes:any) {
 
 
 export function mount_component(
-  component: App,
+  component: BaseComponent,
   target: any,
   anchor: any,
   customElement: any
@@ -56,10 +56,10 @@ export function mount_component(
 }
 
 export function init(
-  component: App,
+  component: BaseComponent,
   options: any,
   instance: (
-    component: App,
+    component: BaseComponent,
     options: any,
     invalidate: (i: any, ret: any, ...res: any) => any
   ) => Array<any>,
@@ -111,7 +111,7 @@ export function init(
   }
 }
 
-export function make_dirty(component: App, index: number) {
+export function make_dirty(component: BaseComponent, index: number) {
   if (component.$$) {
     
     //dirty ga?

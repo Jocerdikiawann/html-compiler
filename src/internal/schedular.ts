@@ -1,12 +1,12 @@
-import { App, T$$ } from "./App";
+import { BaseComponent, T$$ } from "./Component";
 
-export let dirtyComponent:Array<App> = []
+export let dirtyComponent:Array<BaseComponent> = []
 
 const resolvedPromise = Promise.resolve()
 
 let stillUpdate = false
 
-export function pushSchedule(component:App){
+export function pushSchedule(component:BaseComponent){
     if(!stillUpdate){
         stillUpdate = true
         dirtyComponent.push(component)

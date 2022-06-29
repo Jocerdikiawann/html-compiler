@@ -2,7 +2,7 @@
 import './style.css'
 
 import {append,element, insert, setText, set_input_value} from "./internal/dom"
-import {App,Fragment, listen,init, create_component, mount_component} from "./internal/App"
+import {BaseComponent,Fragment, listen,init, create_component, mount_component} from "./internal/Component"
 import {safe_not_equal} from "./internal/utils"
 import { Tes } from './component'
 
@@ -97,7 +97,7 @@ function fragment(ctx:Array<any>):Fragment{
   }
 }
 
-class MainComponent extends App{
+class MainComponent extends BaseComponent{
   constructor(options:any){
     
     super()

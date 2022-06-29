@@ -1,4 +1,4 @@
-import { App, Fragment, init, listen } from "./internal/App";
+import { BaseComponent, Fragment, init, listen } from "./internal/Component";
 import { append, element, insert, setText } from "./internal/dom";
 import { safe_not_equal } from "./internal/utils";
 function instance ($$self:any,$$props:any,$$invalidate:any):any[]{
@@ -40,7 +40,7 @@ function create_fragment(ctx:any[]):Fragment{
     }
 }
 
-export class Tes extends App{
+export class Tes extends BaseComponent{
     constructor(options:any){
         super()
         init(this,options,instance,create_fragment,safe_not_equal)
