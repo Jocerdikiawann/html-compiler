@@ -1,3 +1,8 @@
+/**
+ * Copyright Trian Damai 2022
+ * triandamai@gmail.com
+ * 
+*/
 import { BaseComponent, Fragment, init, listen } from "./internal/Component";
 import { append, element, setText } from "./internal/dom";
 import { safe_not_equal } from "./internal/utils";

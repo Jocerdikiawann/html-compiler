@@ -1,3 +1,8 @@
+/**
+ * Copyright Trian Damai 2022
+ * triandamai@gmail.com
+ * 
+*/
 export function element<K extends keyof HTMLElementTagNameMap>(name: K) {
   return document.createElement<K>(name);
 }

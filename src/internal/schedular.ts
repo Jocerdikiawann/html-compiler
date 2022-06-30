@@ -1,3 +1,8 @@
+/**
+ * Copyright Trian Damai 2022
+ * triandamai@gmail.com
+ * 
+*/
 import { BaseComponent, T$$ } from "./Component";
 
 export let dirtyComponent:Array<BaseComponent> = []

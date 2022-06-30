@@ -1,3 +1,8 @@
+/**
+ * Copyright Trian Damai 2022
+ * triandamai@gmail.com
+ * 
+*/
 import { pushSchedule } from "./schedular";
 
 export interface Fragment {

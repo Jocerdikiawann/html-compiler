@@ -1,4 +1,9 @@
-
+/**
+ * Copyright Trian Damai 2022
+ * triandamai@gmail.com
+ * 
+ * 
+*/
 const validNameChar = /[a-zA-Z0-9_$]/;
 
 export type Molecule ={

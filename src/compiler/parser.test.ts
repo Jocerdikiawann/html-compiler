@@ -1,3 +1,8 @@
+/**
+ * Copyright Trian Damai 2022
+ * triandamai@gmail.com
+ * 
+*/
 import { assert, describe, it } from "vitest";
 import {toMolecule} from "./parser"
 

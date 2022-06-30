@@ -1,4 +1,9 @@
 
+/**
+ * Copyright Trian Damai 2022
+ * triandamai@gmail.com
+ * 
+*/
 import './style.css'
 
 import {append,element, insert, setText, set_input_value} from "./internal/dom"
