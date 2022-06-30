@@ -100,6 +100,9 @@ function fragment(ctx:Array<any>):Fragment{
      
       
     },
+    claim(parent) {
+        
+    },
     destroy() {
         
     },

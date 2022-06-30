@@ -3,15 +3,18 @@
  * triandamai@gmail.com
  * 
 */
-import { assert, describe, it } from "vitest";
-import {toMolecule} from "./parser"
+import { assert, describe, expect, it } from "vitest";
+import {toMolecule} from "../compiler/parser"
+import dedent from "dedent"
 
 describe("Parser Testing", () => {
-  it("pastiin parse itu function", () => {
+  it("pastin toMolecule itu function", () => {
     assert.deepEqual(typeof toMolecule, "function", "Harusnya");
   });
   it("parsing html basic", () => {
-    let source = `<span>ini span</span>`;
+    let source = dedent`
+    <span>ini span</span>
+    `
     assert.deepEqual(toMolecule(source),{
       html:{
         start:0,
@@ -47,5 +50,27 @@ describe("Parser Testing", () => {
     css:null
     });
   });
+
+  it("find index <script></script>",()=>{
+    let source = `<script>let name;</script><div>ini div</div>`
+
+    let startScriptPosition = source.search("<script>")
+    let endScriptPosition = source.search("</script>")
+    let finalEndScript = (endScriptPosition+9)
+
+    let script = source.slice(startScriptPosition,finalEndScript)
+    let html = source.slice(finalEndScript,source.length)
+    
+
+    expect(startScriptPosition).equal(0)
+    expect(endScriptPosition).equal(17)
+
+
+  
+
+    expect(script).equal(`<script>let name;</script>`)
+
+    expect(html).equal(`<div>ini div</div>`)
+  })
 });
 

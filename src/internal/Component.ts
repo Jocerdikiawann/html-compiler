@@ -9,6 +9,7 @@ export interface Fragment {
   create: () => void;
   mount: (target: any, anchor: any) => void;
   update: (ctx: any, dirty: Array<number>) => void;
+  claim:(parent:any)=>void,
   destroy: () => void;
 }
 
@@ -39,8 +40,8 @@ export function create_component(block:Fragment) {
 	block && block.create();
 }
 
-export function claim_component(block:any, parent_nodes:any) {
-	block && block.l(parent_nodes);
+export function claim_component(block:Fragment, parent_nodes:any) {
+	block && block.claim(parent_nodes);
 }
 
 

@@ -45,6 +45,9 @@ function create_fragment(ctx:any[]):Fragment{
                 setText(ctx[0],span)
             }
         },
+        claim(parent) {
+            
+        },
         destroy() {
             
         },
