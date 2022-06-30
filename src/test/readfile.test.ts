@@ -9,7 +9,7 @@ import {join} from "path"
 import {readFile} from "../compiler/files"
 import {toMolecule} from "../compiler/parser"
 
-describe("Parser Testing", () => {
+describe("File Parser Testing", () => {
 
 
   it("read file and parsing",()=>{
